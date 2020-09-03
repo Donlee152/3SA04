@@ -28,7 +28,7 @@
      })
 
      return (
-         <ImageBackground source={require('../GM.jpg')} styles={styles.backdrop}>
+         <ImageBackground source={require('../GM.jpg')} style={styles.backdrop}>
              <Text>Zip Code</Text>
              <Text>{props.zipCode}</Text>
              <Forecast {...forecastInfo}/>
