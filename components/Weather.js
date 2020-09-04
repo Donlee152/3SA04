@@ -1,48 +1,85 @@
- import React, { useState, useEffect } from 'react'
- import { Text, ImageBackground, StyleSheet } from 'react-native'
- import Forecast from './Forecast'
-import { blurTextInput } from 'react-native/Libraries/Components/TextInput/TextInputState'
-
- export default function Weather(props){
-    useEffect(() => {
-        console.log(`fetching data with zipCode = ${props.zipCode}`)
-        if (props.zipCode) {
-        fetch(`http://api.openweathermap.org/data/2.5/weather?q=${props.zipCode},th&units=metric&APPID=5e1bf012e4a7b708a70a2af72d67a1dc`)
-        .then((response) => response.json())
-        .then((json) => {
-        setForecastInfo({
-        main: json.weather[0].main,
-        description: json.weather[0].description,
-        temp: json.main.temp
-        });
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { ImageBackground } from 'react-native';
+import Forecast from './Forecast';
+export default class Weather extends React.Component {
+    constructor(props) {
+    super(props);
+    this.state = {
+    forecast: {
+    main: 'main', description: 'description', temp: 0
+    }
+    }
+    }
+    fetchData = () => {
+        fetch(`http://api.openweathermap.org/data/2.5/weather?q=${this.props.zipCode},th&units=metric&APPID=fd68c0f2039c5a25f666a9ff374bc93e`)
+         .then((response) => response.json())
+         .then((json) => {
+           this.setState(
+            {
+               forecast: {
+                 main: json.weather[0].main,
+                 description: json.weather[0].description,
+                 temp: json.main.temp
+               }
+            });
         })
-        .catch((error) => {
-        console.warn(error);
-        });
+         .catch((error) => {
+            console.warn(error);
+         });
         }
-        }, [props.zipCode])
+        componentDidMount = () => this.fetchData()
+
+        componentDidUpdate = (prevProps) => {
+            if(prevProps.zipCode !== this.props.zipCode){
+              this.fetchData()
+            }
+          }
+
+    render() {
+        return (
+        <View style={styles.container}>
+        
+        <ImageBackground source={require('../GM.jpg')} style={styles.backdrop}>
+        
+        
+        <View style={styles.layout }>
        
-     const [forecastInfo, setForecastInfo] = useState({
-         main: '-',
-         description: '-',
-         temp: 0
-     })
-
-     return (
-         <ImageBackground source={require('../GM.jpg')} style={styles.backdrop}>
-             <Text>Zip Code is </Text>
-             <Text>{props.zipCode}</Text>
-             <Forecast {...forecastInfo}/>
-         </ImageBackground>    
-     )
- }
-
-    const styles = StyleSheet.create({
-        backdrop: {
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: '100%',
-            height: '100%',
-        },
-})
+         <Text    style={styles.red } > Zip code is {this.props.zipCode}.</Text>
+         <Forecast {...this.state.forecast} />
+        </View>
+        </ImageBackground>
+       
+      </View>
+        );
+        }
+       }
+   const styles = StyleSheet.create({
+    container: { 
+        paddingTop: 25, 
+        
+     },
+     layout: {
+      
+        flexDirection:'column',
+        alignItems: 'center',
+       
+        justifyContent:'space-between',
+        height: 300,  opacity: 0.4, 
+        backgroundColor: 'black',
+        fontSize: 50,
+      
+     },
+    red : {
+      
+        paddingTop: 25,
+        color: 'white',
+        textAlign: 'center',
+        fontSize: 25,
+        
+    },
+    backdrop: { width: '100%', 
+    height: '100%',
+  
+   },
+   });

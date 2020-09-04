@@ -54,5 +54,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
         paddingRight: 20,
     },
+   
     header:{ paddingLeft: 115}
 });
