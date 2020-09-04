@@ -1,6 +1,7 @@
  import React, { useState, useEffect } from 'react'
  import { Text, ImageBackground, StyleSheet } from 'react-native'
  import Forecast from './Forecast'
+import { blurTextInput } from 'react-native/Libraries/Components/TextInput/TextInputState'
 
  export default function Weather(props){
     useEffect(() => {
@@ -38,10 +39,10 @@
 
     const styles = StyleSheet.create({
         backdrop: {
-            flexDirection: 'column',
-            justifyContent: 'center',
+            flexDirection: 'row',
             alignItems: 'center',
+            backgroundColor: '#ff00ff',
             width: '100%',
-            height: '100%'
+            height: '70%'
         }
     })
