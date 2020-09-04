@@ -17,8 +17,8 @@ const ZipItem = ({place, code, navigation}) => (
     }}>
 
     <View stye={styles.zipItem}>
-        <Text style={{ fontSize: 30, color: 'blue'}}>{place}</Text>
-        <Text styele={{ fontSize: 30, color: 'blue'}}>{code}</Text>
+        <Text style={styles.zipPlace}>{place}</Text>
+        <Text style={styles.zipCode}>{code}</Text>
     </View>
 
     </TouchableHighlight>
@@ -38,18 +38,21 @@ export default function ZipCodeScreen(){
 
 const styles = StyleSheet.create({
     zipItem: {
-        flex: 1,
-        alignItems: 'center',
-        paddingTop: 10
+        paddingTop: 50,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
     },
     zipPlace: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
+        textAlign: 'left',
+        color: 'blue',
+        fontSize: 20,
+        paddingLeft: 20,
     },
     zipCode: {
-        flex: 1,
-        
-    }
-})
+        textAlign: 'right',
+        color: 'pink',
+        fontSize: 20,
+        paddingRight: 20,
+    },
+    header:{ paddingLeft: 115}
+});
