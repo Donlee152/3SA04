@@ -30,7 +30,7 @@ import { blurTextInput } from 'react-native/Libraries/Components/TextInput/TextI
 
      return (
          <ImageBackground source={require('../GM.jpg')} style={styles.backdrop}>
-             <Text>Zip Code</Text>
+             <Text>Zip Code is </Text>
              <Text>{props.zipCode}</Text>
              <Forecast {...forecastInfo}/>
          </ImageBackground>    
@@ -39,10 +39,10 @@ import { blurTextInput } from 'react-native/Libraries/Components/TextInput/TextI
 
     const styles = StyleSheet.create({
         backdrop: {
-            flexDirection: 'row',
+            flexDirection: 'column',
             alignItems: 'center',
-            backgroundColor: '#ff00ff',
+            justifyContent: 'center',
             width: '100%',
-            height: '70%'
-        }
-    })
+            height: '100%',
+        },
+})
